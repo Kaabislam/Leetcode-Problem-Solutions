@@ -13,30 +13,15 @@ public:
             }
         }
     }
-    
     int closedIsland(vector<vector<int>>& grid) {
         n = grid.size();
         m = grid[0].size();
         vector<vector<int>> v( n,vector<int> (m, 0)); 
-        
-        for(int i = 0;i < m;i++){
-            if(!grid[0][i] and !v[0][i]){
-                dfs(grid,v,0,i);
-            }
-        }
-        for(int i = 0;i < m;i++){
-            if(!grid[n-1][i] and !v[n-1][i]){
-                dfs(grid,v,n-1,i);
-            }
-        }        
         for(int i = 0;i < n;i++){
-            if(!grid[i][0] and !v[i][0]){
-                dfs(grid,v,i,0);
-            }
-        }
-        for(int i = 0;i < n;i++){
-            if(!grid[i][m-1] and !v[i][m-1]){
-                dfs(grid,v,i,m-1);
+            for(int j = 0;j < m;j++){
+                if((i == 0 or j == 0 or i == n-1 or j == m-1) and !grid[i][j] and !v[i][j]){
+                    dfs(grid,v,i,j);
+                }
             }
         }
         int c = 0;
@@ -48,7 +33,6 @@ public:
                 }
             }
         }
-        
         return c;
     }
 };
